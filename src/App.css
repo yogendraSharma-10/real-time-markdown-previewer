@@ -1,0 +1,148 @@
+/*
+ * src/App.css
+ *
+ * Main application styles for the Real-time Markdown Previewer.
+ * Defines global styles, layout for the main App component, and basic theming.
+ * Uses CSS Grid for a responsive two-panel layout.
+ */
+
+/* --- Global Variables & Resets --- */
+:root {
+  /* Color Palette */
+  --primary-bg: #282c34; /* Dark background for the overall app */
+  --secondary-bg: #1e2127; /* Even darker background for panels */
+  --text-color: #abb2bf; /* Light grey text for readability */
+  --header-color: #61dafb; /* React blue for main headers and accents */
+  --border-color: #3e4451; /* Subtle border color */
+  --accent-color: #c678dd; /* Purple accent for links, highlights */
+
+  /* Typography */
+  --font-family-sans: 'Inter', 'Helvetica Neue', Arial, sans-serif; /* Modern sans-serif for UI */
+  --font-family-mono: 'Fira Code', 'Roboto Mono', monospace; /* Monospace for code */
+  --base-font-size: 16px;
+  --line-height: 1.6;
+}
+
+/* Basic reset and box-sizing */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Body and root element styling */
+body {
+  margin: 0;
+  font-family: var(--font-family-sans);
+  font-size: var(--base-font-size);
+  line-height: var(--line-height);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--primary-bg);
+  color: var(--text-color);
+  min-height: 100vh; /* Ensure body takes full viewport height */
+  display: flex; /* Use flex to make #root fill available space */
+  flex-direction: column;
+}
+
+#root {
+  flex: 1; /* Allow the React root element to grow and fill space */
+}
+
+/* --- App Layout --- */
+.App {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Two equal columns for editor and preview */
+  grid-template-rows: auto 1fr; /* Header row, then content row */
+  gap: 1rem; /* Space between grid items */
+  min-height: 100vh; /* Ensure app container takes full viewport height */
+  padding: 1rem; /* Padding around the entire app */
+  overflow: hidden; /* Prevent scrollbars on the main app container */
+}
+
+/* App Header Styling */
+.App-header {
+  grid-column: 1 / -1; /* Span across all columns */
+  text-align: center;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 1rem;
+}
+
+.App-header h1 {
+  color: var(--header-color);
+  font-size: 2.5rem;
+  margin: 0;
+  font-family: var(--font-family-sans);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+/* --- Panel Base Styles (for MarkdownEditor and PreviewPanel) --- */
+.panel {
+  background-color: var(--secondary-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  overflow: hidden; /* Crucial for containing scrollable content */
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+}
+
+.panel-header {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border-color);
+  font-weight: bold;
+  color: var(--header-color);
+  background-color: var(--primary-bg);
+  font-family: var(--font-family-sans);
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.panel-content {
+  flex: 1; /* Allows content to take up remaining vertical space */
+  padding: 1rem;
+  overflow-y: auto; /* Enable vertical scrolling for content if it overflows */
+  line-height: var(--line-height);
+}
+
+/* --- Markdown Preview Specific Styles --- */
+/* These styles target the rendered HTML within the preview panel */
+.preview-content h1,
+.preview-content h2,
+.preview-content h3,
+.preview-content h4,
+.preview-content h5,
+.preview-content h6 {
+  color: var(--header-color);
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+  font-family: var(--font-family-sans);
+  line-height: 1.2;
+}
+
+.preview-content h1 { font-size: 2em; border-bottom: 1px solid var(--border-color); padding-bottom: 0.3em; }
+.preview-content h2 { font-size: 1.75em; }
+.preview-content h3 { font-size: 1.5em; }
+.preview-content h4 { font-size: 1.25em; }
+.preview-content h5 { font-size: 1.1em; }
+.preview-content h6 { font-size: 1em; color: var(--text-color); }
+
+.preview-content p {
+  margin-bottom: 1em;
+}
+
+.preview-content a {
+  color: var(--accent-color);
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+
+.preview-content a:hover {
+  text-decoration: underline;
+  color: lighten(var(--accent-color), 10%); /* Placeholder for a lighter color */
+}
+
+.preview
